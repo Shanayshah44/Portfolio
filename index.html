@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Shanay Shah – Backend Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F2F3FF; --panel:#FFFFFF; --line:#D5D9F5; --text:#12173D; --muted:#555D8F;
+  --pink:#D6246E; --cyan:#0A7FA6; --glow:rgba(214,36,110,.12);
+  --display:"Bricolage Grotesque",system-ui,sans-serif; --body:"DM Sans",system-ui,sans-serif; --mono:"JetBrains Mono",ui-monospace,monospace;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0A0F2C; --panel:#121947; --line:#2B3377; --text:#EAEFFF; --muted:#9FA9DC;
+  --pink:#FF4D8D; --cyan:#4FE0FF; --glow:rgba(255,77,141,.18);
+}}
+:root[data-theme="dark"]{
+  --bg:#0A0F2C; --panel:#121947; --line:#2B3377; --text:#EAEFFF; --muted:#9FA9DC;
+  --pink:#FF4D8D; --cyan:#4FE0FF; --glow:rgba(255,77,141,.18);
+}
+*,*::before,*::after{box-sizing:inherit}
+html{height:100%;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 72px);scroll-behavior:smooth}
+body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font:400 1.0625rem/1.65 var(--body);-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:30}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+header.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:16px}
+.logo{font:800 1.15rem var(--display);text-decoration:none;letter-spacing:-.02em}
+.logo i{font-style:normal;color:var(--pink)}
+.nav ul{display:flex;gap:22px;list-style:none;margin:0;padding:0;font-size:.95rem}
+.nav ul a{text-decoration:none;color:var(--muted)}
+.nav ul a:hover{color:var(--text)}
+.theme{border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:99px;padding:6px 14px;font:500 .85rem var(--body);cursor:pointer}
+@media(max-width:720px){.nav ul{display:none}}
+
+/* hero */
+.hero{padding:72px 0 56px}
+.hero .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:center}
+@media(max-width:900px){.hero .wrap{grid-template-columns:1fr}}
+h1{font:800 clamp(2.6rem,6.2vw,4.6rem)/1.02 var(--display);letter-spacing:-.035em;margin:0 0 22px}
+h1 span{display:block;color:var(--pink)}
+.lede{color:var(--muted);max-width:34em;margin:0 0 30px;font-size:1.15rem}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-block;padding:12px 22px;border-radius:10px;font-weight:700;text-decoration:none;border:1px solid var(--line);background:var(--panel)}
+.btn.main{background:var(--pink);border-color:var(--pink);color:#fff}
+.btn:hover{transform:translateY(-2px)}
+.btn{transition:transform .2s}
+
+.console{background:var(--panel);border:1px solid var(--line);border-radius:14px;box-shadow:0 0 0 6px var(--glow),0 30px 60px -30px var(--glow);overflow:hidden;font-family:var(--mono);font-size:.8rem}
+.console .bar{display:flex;gap:6px;align-items:center;padding:10px 14px;border-bottom:1px solid var(--line);color:var(--muted)}
+.console .bar b{width:9px;height:9px;border-radius:50%;background:var(--line)}
+.console .bar span{margin-left:auto}
+.pipe{display:flex;flex-wrap:wrap;gap:6px;padding:16px 14px 6px;align-items:center}
+.node{padding:5px 9px;border:1px solid var(--line);border-radius:6px;color:var(--muted);transition:all .25s}
+.node.on{border-color:var(--cyan);color:var(--cyan);background:color-mix(in srgb,var(--cyan) 12%,transparent)}
+.node.alert.on{border-color:var(--pink);color:var(--pink);background:color-mix(in srgb,var(--pink) 12%,transparent)}
+.sep{color:var(--line)}
+.log{padding:10px 14px 16px;height:178px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;gap:5px}
+.log p{margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--muted)}
+.log p em{font-style:normal;color:var(--cyan)}
+.log p strong{font-weight:500;color:var(--pink)}
+
+/* sections */
+section{padding:72px 0;border-top:1px solid var(--line)}
+h2{font:800 clamp(1.9rem,4vw,2.7rem)/1.1 var(--display);letter-spacing:-.03em;margin:0 0 36px}
+.about{display:grid;grid-template-columns:1.4fr 1fr;gap:48px}
+@media(max-width:800px){.about{grid-template-columns:1fr}}
+.about p{margin:0 0 16px;max-width:38em}
+.facts{display:grid;gap:12px;align-content:start}
+.fact{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+.fact b{display:block;font:700 1.5rem var(--display);color:var(--pink)}
+.fact span{color:var(--muted);font-size:.95rem}
+
+.tl{position:relative;padding-left:28px;border-left:2px solid var(--line)}
+.tl::before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--pink);box-shadow:0 0 0 5px var(--glow)}
+.tl h3{font:700 1.4rem var(--display);margin:0}
+.tl .when{color:var(--cyan);font:500 .85rem var(--mono);margin:4px 0 14px}
+.tl ul{margin:0;padding-left:18px;max-width:46em}
+.tl li{margin-bottom:8px}
+
+.projects{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+@media(max-width:860px){.projects{grid-template-columns:1fr}}
+.proj{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:30px}
+.proj:first-child{border-color:var(--pink)}
+.proj h3{font:800 1.7rem var(--display);margin:0 0 10px;letter-spacing:-.02em}
+.proj p{color:var(--muted);margin:0 0 16px}
+.proj ul{padding-left:18px;margin:0 0 20px}
+.proj li{margin-bottom:8px}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tags span{font:500 .78rem var(--mono);padding:4px 10px;border-radius:99px;border:1px solid var(--line);color:var(--cyan)}
+
+.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px}
+.sk h3{font:700 1.05rem var(--display);margin:0 0 10px}
+.sk .tags span{color:var(--text)}
+
+.edu{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+@media(max-width:700px){.edu{grid-template-columns:1fr}}
+.edu h3{margin:0;font:700 1.25rem var(--display)}
+.edu .when{color:var(--cyan);font:500 .85rem var(--mono);margin:2px 0 10px}
+.edu p{margin:0;color:var(--muted);font-size:.97rem}
+
+.contact{text-align:left}
+.contact h2{font-size:clamp(2.2rem,6vw,4rem)}
+.links{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px}
+footer{padding:28px 0 40px;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line)}
+
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header class="nav"><div class="wrap">
+  <a class="logo" href="#top">shanay<i>.</i>dev</a>
+  <ul><li><a href="#about">About</a></li><li><a href="#experience">Experience</a></li><li><a href="#projects">Projects</a></li><li><a href="#skills">Skills</a></li><li><a href="#contact">Contact</a></li></ul>
+  <button class="theme" id="theme" type="button" aria-label="Switch light or dark theme">Theme</button>
+</div></header>
+
+<main id="top">
+<div class="hero"><div class="wrap">
+  <div>
+    <h1>Shanay Shah<span>Backend engineer.</span></h1>
+    <p class="lede">I build Java microservices that catch problems early: integrations, event pipelines and search that turn a noisy monitoring alert into a clear incident.</p>
+    <div class="cta">
+      <a class="btn main" href="#projects">See my projects</a>
+      <a class="btn" href="mailto:shanayshah4445@gmail.com">Email me</a>
+    </div>
+  </div>
+  <div class="console" aria-label="Animated example of an alert moving through a data pipeline">
+    <div class="bar"><b></b><b></b><b></b><span>incident-pipeline · live demo</span></div>
+    <div class="pipe" id="pipe">
+      <span class="node">Monitoring tool</span><span class="sep">›</span>
+      <span class="node">Integration API</span><span class="sep">›</span>
+      <span class="node">Kafka</span><span class="sep">›</span>
+      <span class="node">MongoDB</span><span class="sep">›</span>
+      <span class="node">Elasticsearch</span><span class="sep">›</span>
+      <span class="node alert">Incident</span>
+    </div>
+    <div class="log" id="log"></div>
+  </div>
+</div></div>
+
+<section id="about"><div class="wrap">
+  <h2>Systems that tell you what broke.</h2>
+  <div class="about">
+    <div>
+      <p>I'm a software engineer at Crest Data, where I design backend systems with Java, Spring Boot and Quarkus. My work sits in the path between a failing system and the person who needs to know about it.</p>
+      <p>I like microservices, clean object-oriented design and data stores chosen for the job. I work in agile teams: sprint planning, code reviews and pair programming.</p>
+      <p>Outside client work I built Dexter, a tool that finds code smells and applies AI-generated fixes.</p>
+    </div>
+    <div class="facts">
+      <div class="fact"><b>3+ years</b><span>building Java backends</span></div>
+      <div class="fact"><b>6 data and messaging tools</b><span>Kafka, RabbitMQ, MongoDB, PostgreSQL, MySQL, Elasticsearch</span></div>
+      <div class="fact"><b>3 languages</b><span>English, Hindi, Gujarati</span></div>
+    </div>
+  </div>
+</div></section>
+
+<section id="experience"><div class="wrap">
+  <h2>Experience</h2>
+  <div class="tl">
+    <h3>Software Engineer, Crest Data</h3>
+    <div class="when">Nov 2023 – present</div>
+    <ul>
+      <li>Design and build scalable, high-performance backend systems with Java, Spring Boot and Quarkus.</li>
+      <li>Work with microservices architecture and design patterns on a daily basis.</li>
+      <li>Use AWS services such as EC2 and S3 alongside MySQL, PostgreSQL and MongoDB, with a focus on data modeling and performance tuning.</li>
+      <li>Collaborate with cross-functional teams in agile sprints, code reviews and pair programming.</li>
+    </ul>
+  </div>
+</div></section>
+
+<section id="projects"><div class="wrap">
+  <h2>Projects</h2>
+  <div class="projects">
+    <article class="proj">
+      <h3>AIOps Incident Management</h3>
+      <p>A product that creates and manages incidents and alerts whenever a monitoring tool detects a problem, so users are notified in time to respond.</p>
+      <ul>
+        <li>Built a customizable Integration API so users can connect their own third-party monitoring tools.</li>
+        <li>Worked on the data pipeline with Kafka, MongoDB and Elasticsearch: message handling, storage and search.</li>
+        <li>Found and fixed problems across distributed microservices.</li>
+      </ul>
+      <div class="tags"><span>Java</span><span>Quarkus</span><span>Kafka</span><span>MongoDB</span><span>Elasticsearch</span></div>
+    </article>
+    <article class="proj">
+      <h3>Dexter</h3>
+      <p>A Java tool that finds code smells such as long methods, redundant code and large classes, then helps fix them.</p>
+      <ul>
+        <li>Wrote algorithms that suggest refactorings like method extraction and class splitting.</li>
+        <li>Used an AI model to generate fixes after parsing code, then applied them to the original file automatically.</li>
+        <li>Improved readability and maintainability by automating clean-code recommendations.</li>
+      </ul>
+      <div class="tags"><span>Java</span><span>Spring Boot</span><span>AI model</span><span>Git</span><span>Jira</span></div>
+    </article>
+  </div>
+</div></section>
+
+<section id="skills"><div class="wrap">
+  <h2>Toolbox</h2>
+  <div class="skills">
+    <div class="sk"><h3>Languages</h3><div class="tags"><span>Java</span><span>C/C++</span><span>Python</span></div></div>
+    <div class="sk"><h3>Frameworks</h3><div class="tags"><span>Quarkus</span><span>Spring Boot</span></div></div>
+    <div class="sk"><h3>Databases</h3><div class="tags"><span>MySQL</span><span>PostgreSQL</span><span>MongoDB</span><span>SQLite</span><span>Elasticsearch</span><span>SQL</span></div></div>
+    <div class="sk"><h3>Messaging</h3><div class="tags"><span>Kafka</span><span>RabbitMQ</span></div></div>
+    <div class="sk"><h3>Cloud and containers</h3><div class="tags"><span>AWS</span><span>Kubernetes</span><span>Docker</span><span>Docker Compose</span></div></div>
+    <div class="sk"><h3>Tools</h3><div class="tags"><span>Git</span><span>Linux</span><span>Jenkins</span><span>Postman</span><span>Jira</span><span>Figma</span><span>VS Code</span></div></div>
+  </div>
+</div></section>
+
+<section id="education"><div class="wrap">
+  <h2>Education</h2>
+  <div class="edu">
+    <div><h3>B.Tech, Computer Engineering</h3><div class="when">2020 – 2024 · GCET College</div><p>Data structures, algorithms, OOP, databases, operating systems, machine learning, computer networks, compiler construction and software engineering principles.</p></div>
+    <div><h3>Class XII</h3><div class="when">2018 – 2020 · AB School, Navsari</div><p>Physics, Chemistry and Math.</p></div>
+  </div>
+</div></section>
+
+<section id="contact" class="contact"><div class="wrap">
+  <h2>Let's build something reliable.</h2>
+  <div class="links">
+    <a class="btn main" href="mailto:shanayshah4445@gmail.com">shanayshah4445@gmail.com</a>
+    <a class="btn" href="https://www.linkedin.com/in/shanay-shah-803211201" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="btn" href="https://github.com/Shanayshah44" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</div></section>
+</main>
+<footer><div class="wrap">© 2026 Shanay Shah</div></footer>
+
+<script>
+(function(){
+  var root=document.documentElement,btn=document.getElementById('theme');
+  try{var s=localStorage.getItem('theme');if(s)root.setAttribute('data-theme',s)}catch(e){}
+  btn.addEventListener('click',function(){
+    var dark=root.getAttribute('data-theme')?root.getAttribute('data-theme')==='dark':matchMedia('(prefers-color-scheme: dark)').matches;
+    var n=dark?'light':'dark';root.setAttribute('data-theme',n);
+    try{localStorage.setItem('theme',n)}catch(e){}
+  });
+
+  var nodes=[].slice.call(document.querySelectorAll('#pipe .node')),log=document.getElementById('log');
+  var alerts=[
+    ['cpu_usage > 92%','api-gateway'],['disk_free < 8%','db-node-2'],['p99_latency 2.4s','checkout-svc'],
+    ['pod_restart x5','auth-service'],['error_rate 4.1%','payments'],['queue_lag 12k','notify-worker']
+  ];
+  var steps=[
+    function(a){return 'received <em>'+a[0]+'</em> from '+a[1]},
+    function(a){return 'normalized by integration api'},
+    function(a){return 'published to kafka topic <em>alerts.raw</em>'},
+    function(a){return 'stored in mongodb'},
+    function(a){return 'indexed in elasticsearch'},
+    function(a){return '<strong>incident created</strong> and team notified'}
+  ];
+  var i=0,k=0,a=alerts[0];
+  function add(html){
+    var p=document.createElement('p');p.innerHTML=html;log.appendChild(p);
+    while(log.children.length>8)log.removeChild(log.firstChild);
+  }
+  function tick(){
+    nodes.forEach(function(n,j){n.classList.toggle('on',j===k)});
+    add(steps[k](a));
+    k++;
+    if(k>=steps.length){k=0;i=(i+1)%alerts.length;a=alerts[i]}
+  }
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches){
+    steps.forEach(function(f){add(f(a))});nodes[5].classList.add('on');
+  }else{tick();setInterval(tick,1100)}
+})();
+</script>
+</body>
+</html>
